@@ -1,82 +1,93 @@
-# 🏨 Hotel Booking API
+# Hotel Booking API
 
-A RESTful **ASP.NET Core 8 Web API** for managing hotels, rooms, and reservations.  
-This project demonstrates clean layered architecture with **Controllers, DTOs, Repository Pattern, Custom Validators**, and **structured logging with Serilog**.  
-Database connectivity is implemented using **Microsoft.Data.SqlClient** with SQL Server.  
-
----
-
-## 🚀 Features
-- 🔹 Hotel Management (CRUD operations for hotels)
-- 🔹 Room and Room Type Management
-- 🔹 Booking, Reservation, and Cancellation APIs
-- 🔹 User management
-- 🔹 SQL Server integration using **Microsoft.Data.SqlClient**
-- 🔹 Repository Pattern for clean data access
-- 🔹 DTOs for request/response handling
-- 🔹 Attribute-based validation (dates, price ranges, etc.)
-- 🔹 **Logging with Serilog** (daily rolling file logs)
-- 🔹 API Documentation with Swagger/OpenAPI
+A robust **ASP.NET Core 8.0 Web API** project for managing hotel reservations, room availability, users, and payments.  
+This API is designed with modular architecture, clean code practices, and logging using **Serilog**.  
 
 ---
 
-## 🛠 Tech Stack
-- **Backend:** ASP.NET Core 8 Web API  
-- **Database Access:** Microsoft.Data.SqlClient (ADO.NET)  
-- **Architecture:** Repository Pattern + DTOs + Attribute-based Validation  
-- **Database:** SQL Server  
-- **Logging:** Serilog (rolling file logs)  
-- **Documentation:** Swagger / OpenAPI (Swashbuckle.AspNetCore)  
+## Features
+
+- **User Management** with authentication and role-based authorization  
+- **Hotel Search & Filtering** by location, price, amenities, and more  
+- **Reservation System** with support for bookings, cancellations, and modifications  
+- **Payment Processing** with invoice and refund management  
+- **Logging** via Serilog with file-based rolling logs  
+- **Swagger/OpenAPI** integration for easy API documentation and testing  
 
 ---
 
-## 📂 Project Structure
-HotelBookingAPI/
-│── Connection/ # Database connection factory (SqlConnectionFactory)
-│── Controllers/ # API endpoints
-│── CustomValidator/ # Attribute-based validation
-│── DTOs/ # Request/Response objects
-│── Extensions/ # Helper extensions
-│── Models/ # Common models (e.g., APIResponse)
-│── Repository/ # Data access layer (SqlClient + Repository Pattern)
-│── Properties/
-│── Program.cs # Entry point
-│── appsettings.json # Config (with safe placeholders)
-│── HotelBookingAPI.csproj
+## Modules Overview
 
+### 1. User Management Module
+- **Role-Based Access Control**: Differentiate access levels (Administrator, Manager, Guest).  
+- **Authentication and Authorization**: Secure login, ensuring users only access authorized features.  
+- **User Profile Management**: Update personal and contact information.  
+
+### 2. Search and Filter Module
+- **Search**: Find hotels by location, price, star rating, amenities, etc.  
+- **Filter**: Refine search results with advanced filters.  
+
+### 3. Hotel Management Module (Admin/Owners)
+- Add, update, or remove hotel listings.  
+- Manage room types, availability, prices, and facilities.  
+
+### 4. Amenities Management Module
+- **Amenities Setup and Mapping**: Define/manage amenities like spa, gym, pool, etc.  
+
+### 5. Room Management Module
+- **Room Setup**: Categorize rooms with features and availability.  
+- **Room Availability Checking**: Real-time availability for reservations.  
+
+### 6. Reservation System Module
+- **Booking Engine**: Book rooms with dates and preferences.  
+- **Reservation Modifications**: Handle cancellations/alterations.  
+- **Group Bookings**: Book multiple rooms under one reservation.  
+
+### 7. Guest Management Module
+- **Guest Registration**: Manage guest details and preferences.  
+
+### 8. Payment Module
+- **Payment and Invoicing**: Process payments and generate invoices.  
+- **Refund Management**: Handle refunds across different methods.  
 
 ---
 
-## ⚡ Getting Started
+## Tech Stack
 
-### 🔹 Prerequisites
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
-- SQL Server (local or remote)
+- **Framework**: ASP.NET Core 8.0  
+- **Database**: Microsoft SQL Server (via `Microsoft.Data.SqlClient`)  
+- **Logging**: Serilog (File Sink, Config-based)  
+- **API Docs**: Swagger / OpenAPI  
 
-### 🔹 Clone the Repository
-```bash
-git clone https://github.com/mrjat11/HotelBookingAPI.git
-cd HotelBookingAPI
+---
 
-🔹 Setup Database
+## Setup Instructions
 
-Update the connection string in appsettings.json:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/HotelBookingAPI.git
+   cd HotelBookingAPI
+
+
+Update your connection string in appsettings.json:
+
 "ConnectionStrings": {
-  "DefaultConnection": "YourConnectionStringHere"}
+  "DefaultConnection": "YourConnectionStringHere" }
 
-🔹 Run the API
+Run the application:
 dotnet run
 
-The API will be available at:
 
+Access Swagger UI at:
 https://localhost:5001/swagger
 
 
+Logging Configuration
 
-📖 Logging with Serilog
-This project uses Serilog for structured logging with daily rolling log files.
+Logging is handled via Serilog, with daily rolling logs.
+Default path: Logs/MyAppLog-.txt
 
-Sample Configuration (appsettings.json):
+Example configuration in appsettings.json:
 
 "Serilog": {
   "MinimumLevel": {
@@ -98,41 +109,8 @@ Sample Configuration (appsettings.json):
   ]
 }
 
-Usage Example (Controller):
-_logger.LogInformation("Creating reservation for UserId {UserId} on {Date}", 
-    reservation.UserId, reservation.ReservationDate);
 
-try
-{
-    // business logic...
-}
-catch (Exception ex)
-{
-    _logger.LogError(ex, "Error occurred while creating reservation for UserId {UserId}", reservation.UserId);
-}
+Author
 
-Logs are written to:
-/Logs/MyAppLog-2025-09-01.txt
-
-
-📝 Future Improvements
-
-✅ Authentication & Authorization (JWT)
-
-✅ Unit & Integration Testing
-
-✅ CI/CD with GitHub Actions
-
-✅ Docker containerization
-
-
-## Author
-
-**Abhishek Jat**
-
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/mrjat0702)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/abhishek-jat-5bb785254/)
-
-
-
-⭐ If you like this project, give it a star on GitHub!
+Abhishek Jat
+LinkedIn: https://www.linkedin.com/in/abhishek-jat-409250208/
